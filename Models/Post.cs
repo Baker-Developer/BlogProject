@@ -10,6 +10,9 @@ namespace BlogProject.Models
         public int Id { get; set; }
 
         public int BlogId { get; set; }
+        
+        public string blah { get; set; }
+
 
         public string AuthorId { get; set; }
 
