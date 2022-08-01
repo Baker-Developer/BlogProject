@@ -11,9 +11,6 @@ namespace BlogProject.Models
 
         public int BlogId { get; set; }
         
-        public string blah { get; set; }
-
-
         public string AuthorId { get; set; }
 
         [Required]
