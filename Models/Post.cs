@@ -14,7 +14,7 @@ namespace BlogProject.Models
         public string AuthorId { get; set; }
 
         [Required]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} and at the most {1} characters long.", MinimumLength = 2)]
+        [StringLength(75, ErrorMessage = "The {0} must be at least {2} and at the most {1} characters long.", MinimumLength = 2)]
         public string Title { get; set; }
 
 
@@ -35,6 +35,7 @@ namespace BlogProject.Models
         [Display(Name = "Updated Date")]
         public Nullable<DateTime> Updated { get; set; }
 
+        public bool IsReady { get; set; }
 
         public string Slug { get; set; }
 
