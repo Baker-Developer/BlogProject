@@ -40,6 +40,7 @@
                     <a asp-controller="Home" asp-action="Index"  class="nav-item nav-link active">Home</a>
                     <a asp-controller="Home" asp-action="About"  class="nav-item nav-link">About</a>
                     <a asp-controller="Home" asp-action="Contact"  class="nav-item nav-link">Contact</a>
+                  
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu rounded-0 m-0">
@@ -83,10 +84,9 @@
     </div>
     <!-- Header End -->
     <!-- Main Content -->
-    <div class="container-fluid pt-3">
+    
         @RenderBody()
-    </div>
-
+    
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
