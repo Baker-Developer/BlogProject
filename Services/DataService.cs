@@ -63,7 +63,7 @@ namespace BlogProject.Services
                 UserName = "benjamin@bakermedical.net",
                 FirstName = "Benjamin",
                 LastName = "Baker",
-                // ISSUE
+                DisplayName = "",
                 PhoneNumber = "5013393105",
                 EmailConfirmed = true
             };
@@ -82,7 +82,7 @@ namespace BlogProject.Services
                 UserName = "benjaminbaker1122@gmail.com",
                 FirstName = "Benjamin",
                 LastName = "Baker",
-                // ISSUE
+                DisplayName = "",
                 PhoneNumber = "5013393105",
                 EmailConfirmed = true
             };
