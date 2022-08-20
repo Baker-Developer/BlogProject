@@ -36,7 +36,7 @@
 
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <textarea asp-for="Content" class="form-control">  </textarea>
+                <textarea asp-for="Content" class="form-control" id="content">  </textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
 
@@ -48,7 +48,7 @@
 
             <div class="form-group">
                 <label asp-for="Image" class="control-label"></label>
-                <input asp-for="Image" class="form-control" />
+                <input type="file" name="NewImage" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
 
@@ -64,7 +64,11 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+
+    <script>
+        //Default font size but not for placeholder...
+        $('#content').summernote({
+            placeholder: "Content Body"
+        });
+    </script>
     }

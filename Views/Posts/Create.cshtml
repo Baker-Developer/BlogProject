@@ -9,7 +9,7 @@
 <h4>Post</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                <textarea asp-for="Content" class="form-control"> </textarea>
+                <textarea asp-for="Content" id="content" class="form-control"> </textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
 
@@ -45,7 +45,7 @@
                 <input type="file" asp-for="Image" class="form-control" />
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
-          
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -58,7 +58,12 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+        <script>
+            //Default font size but not for placeholder...
+            $('#content').summernote({
+                placeholder: "Post Body"
+            });
+        </script>
     }
-    }
+

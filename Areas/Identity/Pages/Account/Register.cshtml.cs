@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using BlogProject.Services;
+using Microsoft.AspNetCore.Http;
 
 namespace BlogProject.Areas.Identity.Pages.Account
 {
@@ -25,6 +26,7 @@ namespace BlogProject.Areas.Identity.Pages.Account
         private readonly UserManager<BlogUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IBlogEmailSender _emailSender;
+
 
         public RegisterModel(
             UserManager<BlogUser> userManager,
@@ -47,6 +49,9 @@ namespace BlogProject.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+
+            [Display(Name = "Custom Image")]
+            public IFormFile ImageFile { get; set; }
 
             [Required]
             [Display(Name = "First Name")]
@@ -95,13 +100,13 @@ namespace BlogProject.Areas.Identity.Pages.Account
             {
 
 
-                var user = new BlogUser 
-                { 
+                var user = new BlogUser
+                {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     DisplayName = Input.DisplayName,
                     UserName = Input.Email,
-                    Email = Input.Email 
+                    Email = Input.Email
                 };
 
 
