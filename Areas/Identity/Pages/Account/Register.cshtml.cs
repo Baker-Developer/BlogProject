@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using BlogProject.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace BlogProject.Areas.Identity.Pages.Account
 {
@@ -26,18 +28,23 @@ namespace BlogProject.Areas.Identity.Pages.Account
         private readonly UserManager<BlogUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IBlogEmailSender _emailSender;
-
+        private readonly IImageService _imageService;
+        private readonly IConfiguration _configuration;
 
         public RegisterModel(
             UserManager<BlogUser> userManager,
             SignInManager<BlogUser> signInManager,
             ILogger<RegisterModel> logger,
-            IBlogEmailSender emailSender)
+            IBlogEmailSender emailSender,
+            IImageService imageService,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _imageService = imageService;
+            _configuration = configuration;
         }
 
         [BindProperty]
@@ -49,7 +56,6 @@ namespace BlogProject.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-
             [Display(Name = "Custom Image")]
             public IFormFile ImageFile { get; set; }
 
@@ -106,7 +112,12 @@ namespace BlogProject.Areas.Identity.Pages.Account
                     LastName = Input.LastName,
                     DisplayName = Input.DisplayName,
                     UserName = Input.Email,
-                    Email = Input.Email
+                    Email = Input.Email,
+                    ImageData = await _imageService.EncodeImageAsync(Input.ImageFile) ??
+                                await _imageService.EncodeImageAsync(_configuration["DefaultUserImage"]),
+                    ContentType = Input.ImageFile != null ?
+                   Path.GetExtension(_configuration["DefaultUserImage"]) :
+                   _imageService.ContentType(Input.ImageFile)
                 };
 
 

@@ -9,6 +9,7 @@ using BlogProject.Data;
 using BlogProject.Models;
 using BlogProject.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace BlogProject.Controllers
 {
@@ -17,12 +18,13 @@ namespace BlogProject.Controllers
         private readonly ApplicationDbContext _context;
         private readonly ISlugService _slugService;
         private readonly IImageService _imageService;
-
-        public PostsController(ApplicationDbContext context, ISlugService slugService, IImageService imageService)
+        private readonly UserManager<BlogUser> _userManager;
+        public PostsController(ApplicationDbContext context, ISlugService slugService, IImageService imageService, UserManager<BlogUser> userManager)
         {
             _context = context;
             _slugService = slugService;
             _imageService = imageService;
+            _userManager = userManager;
         }
 
         // GET: Posts
@@ -70,10 +72,14 @@ namespace BlogProject.Controllers
             if (ModelState.IsValid)
             {
                 post.Created = DateTime.Now;
+
+                var authorId = _userManager.GetUserId(User);
+                post.BlogUserId = authorId;
+
                 // Use The _imageService To Store The Incoming User Specified Image 
                 post.ImageData = await _imageService.EncodeImageAsync(post.Image);
                 post.ContentType = _imageService.ContentType(post.Image);
-
+              
                 var slug = _slugService.UrlFriendly(post.Title);
                 if (!_slugService.IsUnique(slug))
                 {
@@ -86,6 +92,20 @@ namespace BlogProject.Controllers
 
                 _context.Add(post);
                 await _context.SaveChangesAsync();
+
+                // Loop Over The Incoming List Of String
+                foreach (var tagText in tagValues)
+                {
+                    _context.Add(new Tag()
+                    {
+                        PostId = post.Id,
+                        BlogUserId = authorId,
+                        Text = tagText
+                    });
+                }
+
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
 
