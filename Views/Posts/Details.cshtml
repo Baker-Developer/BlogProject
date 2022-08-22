@@ -244,12 +244,19 @@
             <div class="mb-5">
                 <h3 class="mb-4">Tag Cloud</h3>
                 <div class="d-flex flex-wrap m-n1">
+
+                    
+                    @foreach(var tag in Model.Tags)
+                    {
+                        <a  class="btn btn-secondary m-1" asp-action="TagIndex" asp-route-tag="@tag.Text.ToLower()">#@tag.Text</a>
+                    }
+@*
                     <a href="" class="btn btn-secondary m-1">Design</a>
                     <a href="" class="btn btn-secondary m-1">Development</a>
                     <a href="" class="btn btn-secondary m-1">Marketing</a>
                     <a href="" class="btn btn-secondary m-1">SEO</a>
                     <a href="" class="btn btn-secondary m-1">Writing</a>
-                    <a href="" class="btn btn-secondary m-1">Consulting</a>
+                    <a href="" class="btn btn-secondary m-1">Consulting</a>*@
                 </div>
             </div>
             <!-- Tags End -->

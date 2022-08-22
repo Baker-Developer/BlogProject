@@ -1,6 +1,6 @@
 ﻿let index = 0;
 
-function AddTag() { 
+function AddTag() {
     // Get A Reference To The TagEntry Input Element
     let tagEntry = document.getElementById("TagEntry")
 
@@ -34,4 +34,24 @@ function DeleteTag() {
         }
     }
 
+}
+
+
+$("form").on("submit", function () {
+    $("#TagList option").prop("selected", "selected");
+})
+
+//Look for the tagValues variable to see if it has data
+if (tagValues != '') {
+    let tagArray = tagValues.split(",");
+    for (let loop = 0; loop < tagArray.length; loop++) {
+        //Load up or replace the options we have
+        ReplaceTag(tagArray[loop], loop);
+        index++;
+    }
+}
+
+function ReplaceTag(tag, index) {
+    let newOption = new Option(tag, tag);
+    document.getElementById("TagList").options[index] = newOption;
 }
