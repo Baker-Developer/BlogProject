@@ -34,10 +34,22 @@ namespace BlogProject.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-     
-        public async Task<IActionResult> Details(int? id)
+        //BlogPostIndex
+        public async Task<IActionResult> BlogPostIndex(int? id)
         {
             if (id == null)
+            {
+                return NotFound();
+            }
+            var posts = _context.Posts.Where(p => p.BlogId == id).ToList();
+            return View("Index",posts);
+        }
+
+
+
+        public async Task<IActionResult> Details(string slug)
+        {
+            if (string.IsNullOrEmpty(slug))
             {
                 return NotFound();
             }
@@ -46,7 +58,7 @@ namespace BlogProject.Controllers
                 .Include(p => p.Blog)
                 .Include(p => p.BlogUser)
                 .Include(p => p.Tags)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Slug == slug);
             if (post == null)
             {
                 return NotFound();
@@ -82,16 +94,45 @@ namespace BlogProject.Controllers
                 // Use The _imageService To Store The Incoming User Specified Image 
                 post.ImageData = await _imageService.EncodeImageAsync(post.Image);
                 post.ContentType = _imageService.ContentType(post.Image);
-              
+
                 var slug = _slugService.UrlFriendly(post.Title);
-                if (!_slugService.IsUnique(slug))
+
+                //Create A Variable To Store Weather An Error Occoured
+                var validationError = false;
+
+
+                //Dectect Incoming Duplicate Slugs
+                if (string.IsNullOrEmpty(slug))
                 {
+                    validationError = true;
+                    ModelState.AddModelError("", "The Title You Provided Cannot Be Used As It Results In A Empty Slug");
+                }
+
+                //Dectect Incoming Duplicate Slugs
+                else if (!_slugService.IsUnique(slug))
+                {
+                    validationError = true;
                     ModelState.AddModelError("Title", "The Title You Provided Cannot Be Used As Is Results In A Duplicate Slug");
+                }
+
+
+                //else if (slug.Contains("test"))
+                //{
+                //    validationError = true;
+                //    ModelState.AddModelError("", "Are You Testing Again?");
+                //    ModelState.AddModelError("Title", "The Title Cannot Contain The Word Test");
+                //}
+
+
+                if (validationError)
+                {
                     ViewData["TagValues"] = string.Join(",", tagValues);
                     return View(post);
                 }
 
                 post.Slug = slug;
+
+
 
                 _context.Add(post);
                 await _context.SaveChangesAsync();
@@ -155,30 +196,50 @@ namespace BlogProject.Controllers
             {
                 try
                 {
-                    var newPost = await _context.Posts.Include(_p => _p.Tags).FirstOrDefaultAsync(p => p.Id == post.Id);
+                    // The Original Post
+                    var originalPost = await _context.Posts.Include(p => p.Tags).FirstOrDefaultAsync(p => p.Id == post.Id);
 
-                    newPost.Updated = DateTime.Now;
-                    newPost.Title = post.Title;
-                    newPost.Abstract = post.Abstract;
-                    newPost.Content = post.Content;
-                    newPost.ReadyStatus = post.ReadyStatus;
+                    originalPost.Updated = DateTime.Now;
+                    originalPost.Title = post.Title;
+                    originalPost.Abstract = post.Abstract;
+                    originalPost.Content = post.Content;
+                    originalPost.ReadyStatus = post.ReadyStatus;
+
+                    var newSlug = _slugService.UrlFriendly(post.Title);
+                    if (newSlug != originalPost.Slug)
+                    {
+                        if (_slugService.IsUnique(newSlug))
+                        {
+                            originalPost.Title = post.Title;
+                            originalPost.Slug = newSlug;
+
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Title", "This Title Cannot Be Used As It Results In A Duplicate Slug");
+                            ViewData["TagValues"] = string.Join(",", post.Tags.Select(t => t.Text));
+                            return View(post);
+                        }
+                    }
 
                     if (newImage is not null)
                     {
-                        newPost.ImageData = await _imageService.EncodeImageAsync(newImage);
-                        newPost.ContentType = _imageService.ContentType(newImage);
+                        originalPost.ImageData = await _imageService.EncodeImageAsync(newImage);
+                        originalPost.ContentType = _imageService.ContentType(newImage);
                     }
 
                     // Remove All Tags Previously Associated With This Post
-                    _context.Tags.RemoveRange(newPost.Tags);
+                    _context.Tags.RemoveRange(originalPost.Tags);
+
+
 
                     // Add In The New Tags From The Edit Form
-                    foreach(var tagText in tagValues)
+                    foreach (var tagText in tagValues)
                     {
                         _context.Add(new Tag()
                         {
                             PostId = post.Id,
-                            BlogUserId = newPost.BlogUserId,
+                            BlogUserId = originalPost.BlogUserId,
                             Text = tagText
                         });
                     }

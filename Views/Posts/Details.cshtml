@@ -248,6 +248,7 @@
                     
                     @foreach(var tag in Model.Tags)
                     {
+
                         <a  class="btn btn-secondary m-1" asp-action="TagIndex" asp-route-tag="@tag.Text.ToLower()">#@tag.Text</a>
                     }
 @*
