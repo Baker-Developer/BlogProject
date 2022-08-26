@@ -34,7 +34,7 @@ namespace BlogProject
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    ConnectionService.GetConnectionString(Configuration)));
 
 
 
@@ -50,6 +50,10 @@ namespace BlogProject
             // Register My Custom DataService Class
             services.AddScoped<DataService>();
 
+
+            // Register A BlogSearchService
+            services.AddScoped<BlogSearchService>();
+
             // Register A Preconfigured Instance Of The MailSettings Class
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             services.AddScoped<IBlogEmailSender, EmailService>();
@@ -59,6 +63,8 @@ namespace BlogProject
 
             // Register A Slug Service
             services.AddScoped<ISlugService, BasicSlugService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
