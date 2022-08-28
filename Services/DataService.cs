@@ -91,11 +91,11 @@ namespace BlogProject.Services
                 EmailConfirmed = true
             };
 
-            // Step 2: Use The UserManager To Create A New User That Is Defined By adminUser
+            // Step 2: Use The UserManager To Create A New User That Is Defined By moderatorUser
             await _userManager.CreateAsync(moderatorUser, "Abc&123!");
 
             // Step 3: Add This User To The Administrator Role
-            await _userManager.AddToRoleAsync(moderatorUser, BlogRole.Administrator.ToString());
+            await _userManager.AddToRoleAsync(moderatorUser, BlogRole.Moderator.ToString());
         }
 
     }

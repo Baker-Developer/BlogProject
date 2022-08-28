@@ -15,7 +15,7 @@
 
 <div class="container py-5">
     <div class="row">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <!-- Blog Detail Start -->
             <div class="pb-3">
 
@@ -94,7 +94,7 @@
 
 
 
-                 
+                 @*
                             @if (comment.Moderated is not null)
                             {
                                 <span class="small">
@@ -121,7 +121,7 @@
                             else if (comment.Deleted is null)
                             {
                                 <P>@comment.ModeratedBody</P>
-                            }
+                            }*@
 
 
 

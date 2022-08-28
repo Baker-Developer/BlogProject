@@ -33,8 +33,7 @@ namespace BlogProject
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(
-                    ConnectionService.GetConnectionString(Configuration)));
+                options.UseNpgsql(ConnectionService.GetConnectionString(Configuration)));
 
 
 

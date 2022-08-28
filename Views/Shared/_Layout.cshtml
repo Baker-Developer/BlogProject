@@ -32,8 +32,9 @@
 
 <body>
     <!-- Navigation Start -->
+  
     <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5" id="mainNav">
             <a asp-controller="Home" asp-action="Index" class="navbar-brand ml-lg-3">
                 <nav class="m-0 display-5 text-uppercase text-primary">Benjamin's IT Blog</nav>
             </a>
@@ -65,11 +66,11 @@
 
                     <partial name="_LoginPartial" name="DisplayName" />
                 </div>
-
+@*
                 <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="SearchTerm">
                     <button class="btn btn-primary px-3" type="submit">Search</button>
-                </form>
+                </form>*@
 
                 @*  <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>*@
 
@@ -82,14 +83,15 @@
         <div class="container text-center py-5">
             <h1 class="text-primary mb-4">Benjamin Baker</h1>
             <h1 class="text-white display-3 mb-5">Blogs & Technology</h1>
-            <!-- <div class="mx-auto" style="width: 100%; max-width: 600px;">
-                <div class="input-group">
-                    <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Tracking Id">
+             <div class="mx-auto" style="width: 100%; max-width: 600px;">
+                <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
+                    
+                    <input class="form-control border-light" type="search"  style="padding: 30px;" placeholder="Search Blogs" aria-label="Search" name="SearchTerm">
                     <div class="input-group-append">
-                        <button class="btn btn-primary px-3">Track & Trace</button>
+                        <button class="btn btn-primary px-3" type="submit">Search</button>
                     </div>
-                </div>
-            </div> -->
+                </form>
+            </div> 
         </div>
     </div>
     <!-- Header End -->

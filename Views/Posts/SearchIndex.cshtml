@@ -16,23 +16,24 @@
 <div class="row">
     @foreach (var post in Model)
     {
-        <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
+        <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
             <div class="card border-dark">
-                <div class="bg-primary">
+                <div class="bg">
                     <div class="card-body text-center">
 
                         <h5 class="card-title">@post.Title</h5>
 
                     </div>
                     <div>
-                        <p class="card-text">@post.Abstract</p>
+                        <p class="card-text text-center">@post.Abstract</p>
                     </div>
                     <div class="text-center">
+
                         <a class="btn btn-dark btn-sm btn-block mb-2" asp-action="Details" asp-controller="Posts" asp-route-slug="@post.Slug">Read More</a>
                     </div>
 
                 </div>
-                <img class="card-img-bottom" width="400" height="400"  src="@imageService.DecodeImage(post.ImageData,  post.ContentType)" />
+                <img class="card-img-bottom img-fliud"   src="@imageService.DecodeImage(post.ImageData,  post.ContentType)" />
             </div>
 
         </div>
