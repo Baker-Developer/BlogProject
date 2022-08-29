@@ -34,7 +34,7 @@
     <!-- Navigation Start -->
 
     <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5" id="mainNav">
+        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5">
             <a asp-controller="Home" asp-action="Index" class="navbar-brand ml-lg-3">
                 <nav class="m-0 display-5 text-uppercase text-primary">Benjamin's Blog</nav>
             </a>
@@ -47,7 +47,6 @@
                     <a asp-controller="Home" asp-action="About" class="nav-item nav-link">About</a>
                     <a asp-controller="Home" asp-action="Contact" class="nav-item nav-link">Contact</a>
 
-                    @*  TODO FIX ROLES? MAYBE?*@
                     @if (User.IsInRole("Administrator"))
                     {
                         <a asp-controller="Blogs" asp-action="Create" class="nav-item nav-link">Create Blog</a>
@@ -77,6 +76,7 @@
         <div class="container text-center py-5">
             <h1 class="text-primary mb-4">@ViewData["MainText"]</h1>
             <h1 class="text-white  mb-5">@ViewData["SubText"]</h1>
+
             <div class="mx-auto" style="width: 100%; max-width: 600px;">
                 <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
 

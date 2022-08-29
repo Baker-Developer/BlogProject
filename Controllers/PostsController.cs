@@ -82,37 +82,6 @@ namespace BlogProject.Controllers
 
 
 
-        //public async Task<IActionResult> Details(string slug)
-        //{
-        //    ViewData["Title"] = "Post Deatils Page";
-        //    if (string.IsNullOrEmpty(slug))
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var post = await _context.Posts
-        //        .Include(p => p.Blog)
-        //        .Include(p => p.BlogUser)
-        //        .Include(p => p.Tags)
-        //        .Include(p => p.Comments)
-        //        .ThenInclude(c => c.BlogUser)
-        //        .FirstOrDefaultAsync(m => m.Slug == slug);
-
-
-
-
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-
-        //    ViewData["HeaderImage"] = _imageService.DecodeImage(post.ImageData, post.ContentType);
-        //    ViewData["MainText"] = post.Title;
-        //    ViewData["SubText"] = post.Abstract;
-        //    return View(post);
-        //}
-
 
         public async Task<IActionResult> Details(string slug)
         {
@@ -135,6 +104,7 @@ namespace BlogProject.Controllers
                 return NotFound();
             }
 
+     
             var dataVm = new PostDetailViewModel()
             {
                 Post = post,

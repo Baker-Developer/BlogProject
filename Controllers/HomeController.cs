@@ -4,6 +4,7 @@ using BlogProject.Services;
 using BlogProject.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using X.PagedList;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BlogProject.Controllers
 {
@@ -19,6 +21,7 @@ namespace BlogProject.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IBlogEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
+
         public HomeController(ILogger<HomeController> logger, IBlogEmailSender emailSender, ApplicationDbContext context)
         {
             _logger = logger;
@@ -30,15 +33,12 @@ namespace BlogProject.Controllers
         {
             var pageNumber = page ?? 1;
             var pageSize = 5;
-            //var blogs = _context.Blogs
-            //            .Where(b => b.Posts.Any(p => p.ReadyStatus == Enums.ReadyStatus.ProductionReady))
-            //            .OrderByDescending(b => b.Created)
-            //            .ToPagedListAsync(pageNumber, pageSize);
             var blogs = _context.Blogs
                       .Include(b => b.BlogUser)
                      .OrderByDescending(b => b.Created)
                      .ToPagedListAsync(pageNumber, pageSize);
 
+          
             return View(await blogs);
         }
 

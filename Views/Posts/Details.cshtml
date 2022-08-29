@@ -10,8 +10,8 @@
 
 <article>
     <div class="row">
-        <div class="col-lg-12">
-            <div class="bg-secondary mb-3" style="padding: 30px;">
+        <div class="col-12">
+            <div class="mb-3" style="padding: 30px; text-align: center">
                 @Html.Raw(Model.Post.Content)
             </div>
         </div>
@@ -40,7 +40,7 @@
     <div class="col text-center">
         @foreach (var tag in Model.Post.Tags.ToList())
         {
-            <a asp-action="TagIndex" asp-route-tag="@tag.Text.ToLower()" class="mb-1 btn btn-sm btn-warning btn-outline-dark">#@tag.Text</a>
+            <a asp-action="TagIndex" asp-route-tag="@tag.Text.ToLower()" class="btn btn-primary btn-sm">#@tag.Text</a>
         }
     </div>
     <hr />
@@ -55,11 +55,11 @@
             @Html.Hidden("Slug", Model.Post.Slug)
 
             <div class="form-group">
-                <label class="h2 control-label font-weight-bold">Add Comment</label>
-                <textarea name="body" class="form-control" rows="10"></textarea>
+                <label class="control-label font-weight-bold">Add Comment</label>
+                <textarea name="body" class="form-control" rows="2"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-dark btn-block btn-sm">Submit</button>
+            <button type="submit" class="btn btn-dark btn-sm">Submit</button>
         </form>
     }
     else
@@ -73,7 +73,7 @@
     <hr class="card-hr" />
     <br />
 
-    <a id="commentSection" class="btn btn-sm btn-dark btn-block mb-2">@Model.Post.Comments.Count Comments(S)</a>
+    <a id="commentSection" class="btn btn-sm btn-dark">@Model.Post.Comments.Count Comments(S)</a>
 
     @{
         var counter = 0;
@@ -158,7 +158,7 @@
                 @if (comment.Moderated is null && comment.Deleted is null && comment.BlogUserId == userManager.GetUserId(User))
                 {
                     <hr>
-                    <button data-bs-toggle="modal" data-bs-target="@($"#moderateModal{counter}") class="btn btn-dark float-right font-weight-bold">Edit</button>
+                    <button data-toggle="modal" data-target="@($"#editModal{counter}") class="btn btn-dark float-right font-weight-bold">Edit</button>
                 }
 
                 @****************************************************************
@@ -169,7 +169,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-2">
-                            <button class="btn btn-dark font-weight-bold btn-block" data-bs-toggle="modal" data-bs-target="@($"#moderateModal{counter}")>Moderate</button>
+                            <button class="btn btn-dark font-weight-bold btn-block" data-bs-toggle="modal" data-bs-target="#moderate">Moderate</button>
                 </div>
                 <div class="col-2">
                             <form asp-action="Delete" asp-controller="Comments">
@@ -188,7 +188,7 @@
 
 
         @*Modals*@
-        <div class="modal" id="@($"#moderateModal{counter}")">
+        <div class="modal" id="editModal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -198,26 +198,25 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form asp-action="Moderate" asp-controller="Comments">
+                        <form asp-action="Edit" asp-controller="Comments">
                             @Html.Hidden("Id", comment.Id)
 
                             <div class="form-group">
                                 <textarea name="Body" class="form-control" required>@comment.Body</textarea>
                             </div>
 
-                            <button class="btn-sm btn-dark border-success font-weight-bold" type="submit">SUBMIT</button>
+                            <button class="btn-sm btn-dark border-success font-weight-bold" type="submit">Submit</button>
                         </form>
                     </div>
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <button type="button" class="btn-sm btn-dark font-weight-bold" data-dismiss="modal">CLOSE</button>
+                        <button type="button" class="btn-sm btn-dark font-weight-bold" data-dismiss="modal">Close</button>
                     </div>
 
                 </div>
             </div>
         </div>
-
         <div class="modal" id="moderate">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -230,7 +229,7 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <form asp-action="Create" asp-controller="Comments">
+                        <form asp-action="Moderate" asp-controller="Comments">
                             @Html.Hidden("Id", comment.Id)
                             @Html.Hidden("Body", comment.Body)
 
