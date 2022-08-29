@@ -11,7 +11,10 @@ using BlogProject.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using BlogProject.Enums;
+using BlogProject.ViewModels;
 using X.PagedList;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace BlogProject.Controllers
 {
@@ -34,6 +37,7 @@ namespace BlogProject.Controllers
         }
 
 
+
         public async Task<IActionResult> SearchIndex(int? page, string searchTerm)
         {
             ViewData["SearchTerm"] = searchTerm;
@@ -47,6 +51,7 @@ namespace BlogProject.Controllers
 
 
         // GET: Posts
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Posts.Include(p => p.Blog).Include(p => p.BlogUser);
@@ -77,8 +82,41 @@ namespace BlogProject.Controllers
 
 
 
+        //public async Task<IActionResult> Details(string slug)
+        //{
+        //    ViewData["Title"] = "Post Deatils Page";
+        //    if (string.IsNullOrEmpty(slug))
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var post = await _context.Posts
+        //        .Include(p => p.Blog)
+        //        .Include(p => p.BlogUser)
+        //        .Include(p => p.Tags)
+        //        .Include(p => p.Comments)
+        //        .ThenInclude(c => c.BlogUser)
+        //        .FirstOrDefaultAsync(m => m.Slug == slug);
+
+
+
+
+        //    if (post == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+
+        //    ViewData["HeaderImage"] = _imageService.DecodeImage(post.ImageData, post.ContentType);
+        //    ViewData["MainText"] = post.Title;
+        //    ViewData["SubText"] = post.Abstract;
+        //    return View(post);
+        //}
+
+
         public async Task<IActionResult> Details(string slug)
         {
+            ViewData["Title"] = "Post Deatils Page";
             if (string.IsNullOrEmpty(slug))
             {
                 return NotFound();
@@ -91,17 +129,32 @@ namespace BlogProject.Controllers
                 .Include(p => p.Comments)
                 .ThenInclude(c => c.BlogUser)
                 .FirstOrDefaultAsync(m => m.Slug == slug);
-            if (post == null)
+
+            if (post == null) 
             {
                 return NotFound();
             }
 
-            return View(post);
+            var dataVm = new PostDetailViewModel()
+            {
+                Post = post,
+                Tags = _context.Tags
+                       .Select(t => t.Text.ToLower())
+                       .Distinct().ToList()
+            };
+         
+
+            ViewData["HeaderImage"] = _imageService.DecodeImage(post.ImageData, post.ContentType);
+            ViewData["MainText"] = post.Title;
+            ViewData["SubText"] = post.Abstract;
+            return View(dataVm);
         }
 
 
 
+
         // GET: Posts/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name");

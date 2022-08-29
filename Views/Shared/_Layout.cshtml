@@ -32,11 +32,11 @@
 
 <body>
     <!-- Navigation Start -->
-  
+
     <div class="container-fluid p-0">
         <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5" id="mainNav">
             <a asp-controller="Home" asp-action="Index" class="navbar-brand ml-lg-3">
-                <nav class="m-0 display-5 text-uppercase text-primary">Benjamin's IT Blog</nav>
+                <nav class="m-0 display-5 text-uppercase text-primary">Benjamin's Blog</nav>
             </a>
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -46,6 +46,8 @@
                     <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active">Home</a>
                     <a asp-controller="Home" asp-action="About" class="nav-item nav-link">About</a>
                     <a asp-controller="Home" asp-action="Contact" class="nav-item nav-link">Contact</a>
+
+                    @*  TODO FIX ROLES? MAYBE?*@
                     @if (User.IsInRole("Administrator"))
                     {
                         <a asp-controller="Blogs" asp-action="Create" class="nav-item nav-link">Create Blog</a>
@@ -56,42 +58,34 @@
                         <a asp-controller="Posts" asp-action="Create" class="nav-item nav-link">Create Post</a>
                     }
 
-                 @*   <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                        <div class="dropdown-menu rounded-0 m-0">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="single.html" class="dropdown-item">Blog Detail</a>
-                        </div>
-                    </div>*@
+
 
                     <partial name="_LoginPartial" name="DisplayName" />
                 </div>
-@*
-                <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="SearchTerm">
-                    <button class="btn btn-primary px-3" type="submit">Search</button>
-                </form>*@
 
-                @*  <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>*@
+
+
 
             </div>
         </nav>
     </div>
     <!-- Navigation End -->
     <!-- Header Start -->
-    <div class="jumbotron jumbotron-fluid mb-5">
+    <div class="jumbotron jumbotron-fluid mb-5" style="background-position: top;
+            background-repeat: no-repeat;
+            background-size: cover; background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(@ViewData["HeaderImage"]) ">
         <div class="container text-center py-5">
-            <h1 class="text-primary mb-4">Benjamin Baker</h1>
-            <h1 class="text-white display-3 mb-5">Blogs & Technology</h1>
-             <div class="mx-auto" style="width: 100%; max-width: 600px;">
+            <h1 class="text-primary mb-4">@ViewData["MainText"]</h1>
+            <h1 class="text-white  mb-5">@ViewData["SubText"]</h1>
+            <div class="mx-auto" style="width: 100%; max-width: 600px;">
                 <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
-                    
-                    <input class="form-control border-light" type="search"  style="padding: 30px;" placeholder="Search Blogs" aria-label="Search" name="SearchTerm">
+
+                    <input class="form-control border-light" type="search" style="padding: 30px;" placeholder="Search Blogs" aria-label="Search" name="SearchTerm">
                     <div class="input-group-append">
                         <button class="btn btn-primary px-3" type="submit">Search</button>
                     </div>
                 </form>
-            </div> 
+            </div>
         </div>
     </div>
     <!-- Header End -->

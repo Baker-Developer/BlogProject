@@ -7,11 +7,9 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center">Index For Posts</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<button class="btn btn-success btn-md float-right font-weight-bold" asp-action="Create">Create New</button>
 <table class="table">
     <thead>
         <tr>
@@ -22,10 +20,12 @@
                 @Html.DisplayNameFor(model => model.Abstract)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Abstract)
+                @Html.DisplayNameFor(model => model.Content)
             </th>
 
-            <th></th>
+            <th>
+              
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -41,6 +41,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Abstract)
                 </td>
+
 
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
