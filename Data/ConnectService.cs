@@ -4,21 +4,27 @@ using Npgsql;
 
 namespace BlogProject.Data
 {
-    public class ConnectionService
+    public static class ConnectionService
     {
         public static string GetConnectionString(IConfiguration configuration)
         {
+            //The default connection string will come from appSettings like usual
             var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+            //It will be automatically overwritten if we are running on Heroku
             var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
             return string.IsNullOrEmpty(databaseUrl) ? connectionString : BuildConnectionString(databaseUrl);
         }
 
-        private static string BuildConnectionString(string databaseUrl)
+        public static string BuildConnectionString(string databaseUrl)
         {
+            //Provides an object representation of a uniform resource identifier (URI) and easy access to the parts of the URI.
             var databaseUri = new Uri(databaseUrl);
             var userInfo = databaseUri.UserInfo.Split(':');
 
-            return new NpgsqlConnectionStringBuilder()
+            //Provides a simple way to create and manage the contents of connection strings used by the NpgsqlConnection class.
+            var builder = new NpgsqlConnectionStringBuilder
             {
                 Host = databaseUri.Host,
                 Port = databaseUri.Port,
@@ -27,7 +33,9 @@ namespace BlogProject.Data
                 Database = databaseUri.LocalPath.TrimStart('/'),
                 SslMode = SslMode.Prefer,
                 TrustServerCertificate = true
-            }.ToString();
+            };
+
+            return builder.ToString();
         }
     }
 }

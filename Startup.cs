@@ -1,4 +1,4 @@
-using BlogProject.Data;
+using BlogProject.Data
 using BlogProject.Models;
 using BlogProject.Services;
 using BlogProject.ViewModels;
@@ -33,7 +33,7 @@ namespace BlogProject
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(ConnectionService.GetConnectionString(Configuration)));
+            options.UseNpgsql(ConnectService.GetConnectionString(Configuration)));
 
 
 
