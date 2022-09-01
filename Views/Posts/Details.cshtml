@@ -158,7 +158,7 @@
                 @if (comment.Moderated is null && comment.Deleted is null && comment.BlogUserId == userManager.GetUserId(User))
                 {
                     <hr>
-                    <button data-toggle="modal" data-target="@($"#editModal{counter}") class="btn btn-dark float-right font-weight-bold">Edit</button>
+                    <button data-toggle="modal" data-target="#editModal" class="btn-sm btn-dark float-center font-weight-bold">Edit</button>
                 }
 
                 @****************************************************************
@@ -169,7 +169,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-2">
-                            <button class="btn btn-dark font-weight-bold btn-block" data-bs-toggle="modal" data-bs-target="#moderate">Moderate</button>
+                            <button class="btn btn-dark font-weight-bold btn-block" data-toggle="modal" data-target="#moderate">Moderate</button>
                 </div>
                 <div class="col-2">
                             <form asp-action="Delete" asp-controller="Comments">
