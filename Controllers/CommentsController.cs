@@ -212,6 +212,7 @@ namespace BlogProject.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id, string slug)
         {
             var comment = await _context.Comments.FindAsync(id);
+            // TODO: Fix Comments Delete
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
 

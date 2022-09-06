@@ -1,7 +1,5 @@
-using BlogProject.Data;
 using BlogProject.Services;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,10 +22,10 @@ namespace BlogProject
             var dataService = host.Services.
                 CreateScope().
                 ServiceProvider.
-                GetRequiredService<ApplicationDbContext>();
+                GetRequiredService<DataService>();
                 
 
-            await dataService.Database.MigrateAsync();
+            await dataService.ManageDataAsync();
 
 
             host.Run();
