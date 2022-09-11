@@ -8,25 +8,30 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="~/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="//fonts.gstatic.com">
-    <link href="//fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="~/css/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
+ 
+    <!--  Bootstrap Stylesheet -->
     <link href="~/css/style.css" rel="stylesheet">
 
+    <!--Bootstrap Custom CSS-->
     <link href="~/css/Custom.css" rel="stylesheet">
 
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/animate.css/animate.min.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+
     <!--SummmerNote-->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
 </head>
 
@@ -56,27 +61,60 @@
                         <a asp-controller="Posts" asp-action="Create" class="nav-item nav-link">Create Post</a>
                     }
 
-                    @*   <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                    <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                    <a href="single.html" class="dropdown-item">Blog Detail</a>
-                    </div>
-                    </div>*@
+
 
                     <partial name="_LoginPartial" name="DisplayName" />
                 </div>
-                @*
-                <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="SearchTerm">
-                <button class="btn btn-primary px-3" type="submit">Search</button>
-                </form>*@
-
-                @*  <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>*@
+            
 
             </div>
         </nav>
     </div>
+
+    <header id="header" class="fixed-top d-flex align-items-center ">
+        <div class="container-fluid">
+
+            <div class="row justify-content-center align-items-center">
+                <div class="col-xl-11 d-flex align-items-center justify-content-between">
+                    <h1 class="logo"><a href="index.html">Benjamin's Blog</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+                    <nav id="navbar" class="navbar">
+                        <ul>
+                            <li><a class="nav-link scrollto " href="#hero">Home</a></li>
+                            <li> <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active">About</a></li>
+                            <li> <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active">Contact</a></li>
+                            <li> <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active">Login</a></li>
+                            <li class="dropdown">
+                                <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="#">Drop Down 1</a></li>
+                                    <li class="dropdown">
+                                        <a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                                        <ul>
+                                            <li><a href="#">Deep Drop Down 1</a></li>
+                                            <li><a href="#">Deep Drop Down 2</a></li>
+                                            <li><a href="#">Deep Drop Down 3</a></li>
+                                            <li><a href="#">Deep Drop Down 4</a></li>
+                                            <li><a href="#">Deep Drop Down 5</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Drop Down 2</a></li>
+                                    <li><a href="#">Drop Down 3</a></li>
+                                    <li><a href="#">Drop Down 4</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                       
+                    </nav><!-- .navbar -->
+                </div>
+            </div>
+
+        </div>
+    </header><!-- End Header -->
+
     <!-- Navigation End -->
     <!-- Header Start -->
     <div class="jumbotron jumbotron-fluid mb-5">
@@ -150,22 +188,7 @@
                     Designed by <a href="https://htmlcodex.com">HTML Codex</a>
                 </p>
             </div>
-            <!-- <div class="col-lg-6 text-center text-md-right">
-                <ul class="nav d-inline-flex">
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Terms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">FAQs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Help</a>
-                    </li>
-                </ul>
-            </div> -->
+     
         </div>
     </div>
     <!-- Footer End -->
@@ -173,17 +196,16 @@
     <!-- JavaScript Libraries -->
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/easing.min.js"></script>
-    <script src="~/js/waypoints.min.js"></script>
-    <script src="~/js/counterup.min.js"></script>
-    <script src="~/js/owl.carousel.min.js"></script>
 
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/vendor/purecounter/purecounter_vanilla.js"></script>
     <!--Sweet Alert 2 CDN-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <!--SummerNote Script-->
-    <script src="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
     <!-- Template Javascript -->
@@ -193,7 +215,3 @@
 </body>
 
 </html>
-
-
-
-
