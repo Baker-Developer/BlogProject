@@ -59,6 +59,78 @@
 </div>
 
 
+
+
+
+
+<section id="blog" class="blog">
+
+    <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+            <div class="col-lg-4 entries">
+
+                <article class="entry">
+
+
+                    @foreach (var blog in Model) {
+                        <div class="entry-img">
+                            <img src="@_imageService.DecodeImage(blog.ImageData, blog.ContentType)" alt="" class="img-fluid">
+                        </div>
+
+                        <h2 class="entry-title">
+                            <a href="blog-single.html">##</a>
+                        </h2>
+
+                        <div class="entry-meta">
+                            <ul>
+                                <li class="d-flex align-items-center">
+                                     <a href="blog-single.html">
+                                        <img class="rounded-circle" style="width: 25px; height: 25px;" src="~/images/defaultUserImage.png" alt="">
+                                        Authored By @blog.BlogUser.FullName
+                                    </a>
+                                </li>
+                                <li class="d-flex align-items-center">
+                                    <i class="bi bi-clock"></i> <a href="blog-single.html">
+                                        <time datetime="2020-01-01">Jan 1, 2020</time>
+                                    </a>
+                                </li>
+                                <hr>
+                            @*    <li class="d-flex align-items-center">
+                                    <i class="bi bi-chat-dots"></i> <a href="blog-single.html">
+                                        12
+                                        Comments
+                                    </a>
+                                </li>*@
+                            </ul>
+                        </div>
+
+                        <div class="entry-content">
+                            <p>
+                                ###
+                            </p>
+                            <div class="read-more">
+                                <a href="blog-single.html">Read More</a>
+                            </div>
+                        </div>
+                    }
+
+                 
+
+                </article>
+                <!-- End blog entry -->
+            </div>
+
+
+        </div>
+    </div>
+</section><!-- End Blog Section -->
+
+
+
+
+
 <!--Add Paging Controls Here-->
 <div class="row">
     <div class="col h3">
