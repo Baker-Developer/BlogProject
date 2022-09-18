@@ -29,13 +29,13 @@
                 var isAdmin = false;
                 if (User.Identity.IsAuthenticated)
                 {
-                    isAdmin = User.IsInRole(BlogRole.Moderator.ToString());
+                    isAdmin = User.IsInRole(BlogRole.Administrator.ToString());
                     isAdmin = isAdmin && (post.BlogUserId == userManager.GetUserId(User));
                 }
 
                 <div class="col-sm-12 col-md-6 col-lg-12 mt-4">
                     <div class="card">
-                        <div class="card-body text-center bg-secondary">
+                        <div class="card-body text-center bg-light">
                             <div class="bg">
 
                                 <h5 class="card-title">@post.Title</h5>
@@ -81,8 +81,8 @@
 
     </div>
 </div>
-<hr />
 
+<hr />
 
 <div class="row">
     <div class="col h3">

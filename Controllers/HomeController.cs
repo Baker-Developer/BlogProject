@@ -56,8 +56,18 @@ namespace BlogProject.Controllers
         public async Task<IActionResult> Contact(ContactMe model)
         {
             // Location Is Where We Will Be Emailing
-            model.Message = $"{model.Message} <hr/> Phone: {model.PhoneNumber}";
-            await _emailSender.SendContactEmailAsync(model.Email, model.Name, model.Subject, model.Message);
+            //model.Message = $"{model.Message} <hr/> Phone: {model.PhoneNumber}";
+            //await _emailSender.SendContactEmailAsync(model.Email, model.Name, model.Subject, model.Message);
+            try
+            {
+                model.Message = $"{model.Message} <hr/> Phone: {model.PhoneNumber}";
+                await _emailSender.SendContactEmailAsync(model.Email, model.Name, model.Subject, model.Message);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index");
+                throw;
+            }
             return RedirectToAction("Index");
         }
 

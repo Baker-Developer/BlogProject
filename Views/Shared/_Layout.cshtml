@@ -8,182 +8,175 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="~/favicon.ico" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="//fonts.gstatic.com">
-    <link href="//fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700"
+          rel="stylesheet">
 
     <!-- Font Awesome -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="~/css/owl.carousel.min.css" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
+    <!--  Bootstrap Stylesheet -->
     <link href="~/css/style.css" rel="stylesheet">
 
+    <!--Bootstrap Custom CSS-->
     <link href="~/css/Custom.css" rel="stylesheet">
 
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/animate.css/animate.min.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+
     <!--SummmerNote-->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
 </head>
 
 <body>
-    <!-- Navigation Start -->
+    <header id="header" class="fixed-top d-flex align-items-center ">
+        <div class="container-fluid">
 
-    <div class="container-fluid p-0">
-        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-lg-5" id="mainNav">
-            <a asp-controller="Home" asp-action="Index" class="navbar-brand ml-lg-3">
-                <nav class="m-0 display-5 text-uppercase text-primary">Benjamin's IT Blog</nav>
-            </a>
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-between px-lg-3" id="navbarCollapse">
-                <div class="navbar-nav m-auto py-0">
-                    <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active">Home</a>
-                    <a asp-controller="Home" asp-action="About" class="nav-item nav-link">About</a>
-                    <a asp-controller="Home" asp-action="Contact" class="nav-item nav-link">Contact</a>
-                    @if (User.IsInRole("Administrator"))
-                    {
-                        <a asp-controller="Blogs" asp-action="Create" class="nav-item nav-link">Create Blog</a>
-                    }
-                    @if (User.IsInRole("Administrator"))
-                    {
+            <div class="row justify-content-center align-items-center">
+                <div class="col-xl-11 d-flex align-items-center justify-content-between">
+                    @*<h1 class="logo"><a asp-controller="Home" asp-action="Index">Benjamin's Blog</a></h1>*@
+                    <h1 class="logo">Benjamin's Blog</h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
-                        <a asp-controller="Posts" asp-action="Create" class="nav-item nav-link">Create Post</a>
-                    }
+                    <nav id="navbar" class="navbar">
+                        <ul>
+                            <li> <a asp-controller="Home" asp-action="Index" class="nav-link btn btn-link text-dark">Home</a></li>
+                            <li>    <a asp-controller="Home" asp-action="Contact" class="nav-link btn btn-link text-dark">Contact</a></li>
+                            <li>    <a asp-controller="Home" asp-action="About" class="nav-link btn btn-link text-dark">About</a></li>
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <li><a asp-controller="Blogs" asp-action="Create" class="nav-link btn btn-link text-dark">Create Blog</a></li>
+                            }
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <li><a asp-controller="Posts" asp-action="Create" class="nav-link btn btn-link text-dark">Create Post</a></li>
+                            }
 
-                    @*   <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                    <div class="dropdown-menu rounded-0 m-0">
-                    <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                    <a href="single.html" class="dropdown-item">Blog Detail</a>
-                    </div>
-                    </div>*@
+                             @*      <li class="dropdown">
+                            <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                            <li><a href="#">Drop Down 1</a></li>
+                            <li class="dropdown">
+                            <a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                            <ul>
+                            <li><a href="#">Deep Drop Down 1</a></li>
+                            <li><a href="#">Deep Drop Down 2</a></li>
+                            <li><a href="#">Deep Drop Down 3</a></li>
+                            <li><a href="#">Deep Drop Down 4</a></li>
+                            <li><a href="#">Deep Drop Down 5</a></li>
+                            </ul>
+                            </li>
+                            <li><a href="#">Drop Down 2</a></li>
+                            <li><a href="#">Drop Down 3</a></li>
+                            <li><a href="#">Drop Down 4</a></li>
+                            </ul>
+                            </li>*@
 
-                    <partial name="_LoginPartial" name="DisplayName" />
+                            <partial name="_LoginPartial" name="DisplayName" />
+
+                        </ul>
+                    </nav>
+                    <!-- .navbar -->
+
                 </div>
-                @*
-                <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="SearchTerm">
-                <button class="btn btn-primary px-3" type="submit">Search</button>
-                </form>*@
-
-                @*  <a href="" class="btn btn-primary py-2 px-4 d-none d-lg-block">Login</a>*@
-
             </div>
-        </nav>
-    </div>
-    <!-- Navigation End -->
-    <!-- Header Start -->
-    <div class="jumbotron jumbotron-fluid mb-5">
-        <div class="container text-center py-5">
-            <h1 class="text-primary mb-4">Benjamin Baker</h1>
-            <h1 class="text-white display-3 mb-5">Blogs & Technology</h1>
-            <div class="mx-auto" style="width: 100%; max-width: 600px;">
-                <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
 
-                    <input class="form-control border-light" type="search" style="padding: 30px;" placeholder="Search Blogs" aria-label="Search" name="SearchTerm">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary px-3" type="submit">Search</button>
-                    </div>
-                </form>
-            </div>
         </div>
+    </header><!-- End Header -->
+    <!-- Navigation End -->
+  
+    <main id="main">
+
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="jumbotron jumbotron-fluid mb-5">
+                <div class="container text-center py-5">
+                    <h1 class="text-primary mb-4">Benjamin Baker</h1>
+                    <h1 class="text-white  mb-5">A Custom Web Applicaiton Using .Net MVC & Bootstrap</h1>
+                    <div class="mx-auto" style="width: 100%; max-width: 600px;">
+                        <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
+                            <input class="form-control border-light" type="search" style="padding: 30px;" placeholder="Search Blogs"
+                                   aria-label="Search" name="SearchTerm">
+                            <button class="btn btn-primary px-3" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      
+      
+    </main>
+
+    <div class="container">
+        @RenderBody()
     </div>
+
+
+
+    <!-- End Breadcrumbs -->
     <!-- Header End -->
     <!-- Main Content -->
-    @RenderBody()
 
 
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white mt-5 py-5 px-sm-3 px-md-5">
-        <div class="row pt-5">
-            <div class="col-lg-7 col-md-6">
+
+
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6 mb-5">
-                        <h3 class="text-primary mb-4">Get In Touch</h3>
-                        <!-- <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p> -->
-                        <p><i class="fa fa-phone-alt mr-2"></i>501-339-3105</p>
-                        <p><i class="fa fa-envelope mr-2"></i>benjamin@bakermedical.net</p>
-                        <div class="d-flex justify-content-start mt-4">
-                            <a class="btn btn-outline-light btn-social mr-2" href="#"><i class="fab fa-github"></i></a>
-                            <a class="btn btn-outline-light btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-outline-light btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-5">
-                        <h3 class="text-primary mb-4">Quick Links</h3>
-                        <div class="d-flex flex-column justify-content-start">
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Services</a>
-                            <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Pricing Plan</a>
-                            <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-5 col-md-6 mb-5">
-                <h3 class="text-primary mb-4">Newsletter</h3>
-                <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu kasd sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
-                <div class="w-100">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary px-4">Sign Up</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5" style="border-color: #3E3E4E !important;">
-        <div class="row">
-            <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
-                <p class="m-0 text-white">
-                    &copy; <a href="#"> 2022 Benjamin Baker</a>. All Rights Reserved.
 
-                    Designed by <a href="https://htmlcodex.com">HTML Codex</a>
-                </p>
+                    <div class="col-lg-6">
+                        <h3>Benjamin's Blog</h3>
+                        <p>
+                            Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies
+                            darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo.
+                            Amet volutpat consequat mauris nunc congue.
+                        </p>
+                    </div>
+
+
+
+                    <div class="col-lg-6 footer-newsletter">
+                        <h4>Our Newsletter</h4>
+                        <p>
+                            Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore
+                            legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.
+                        </p>
+                        <form action="" method="post">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
+                        </form>
+                    </div>
+
+                </div>
             </div>
-            <!-- <div class="col-lg-6 text-center text-md-right">
-                <ul class="nav d-inline-flex">
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Terms</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">FAQs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white py-0" href="#">Help</a>
-                    </li>
-                </ul>
-            </div> -->
         </div>
-    </div>
+
+
+
+    </footer><!-- End Footer -->
     <!-- Footer End -->
     <!-- Back to Top -->
     <!-- JavaScript Libraries -->
     <script src="//code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/easing.min.js"></script>
-    <script src="~/js/waypoints.min.js"></script>
-    <script src="~/js/counterup.min.js"></script>
-    <script src="~/js/owl.carousel.min.js"></script>
 
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/vendor/purecounter/purecounter_vanilla.js"></script>
     <!--Sweet Alert 2 CDN-->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     <!--SummerNote Script-->
-    <script src="//cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 
     <!-- Template Javascript -->
@@ -193,7 +186,3 @@
 </body>
 
 </html>
-
-
-
-
