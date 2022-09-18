@@ -40,7 +40,8 @@
     <div class="col text-center">
         @foreach (var tag in Model.Post.Tags.ToList())
         {
-            <a asp-action="TagIndex" asp-route-tag="@tag.Text.ToLower()" class="btn btn-primary btn-sm">#@tag.Text</a>
+            <a class="btn btn-primary btn-sm">#@tag.Text</a>
+            @* <a asp-action="TagIndex" asp-route-tag="@tag.Text.ToLower()" class="btn btn-primary btn-sm">#@tag.Text</a>*@
         }
     </div>
     <hr />
@@ -80,7 +81,7 @@
     }
     @foreach (var comment in Model.Post.Comments.OrderByDescending(c => c.Created))
     {
-        <div class="bg-secondary">
+        <div class="bg-light">
             <img src="@imageService.DecodeImage(comment.BlogUser.ImageData, comment.BlogUser.ContentType)" alt="Image" class="img-fluid mr-3 mt-1 rounded-circle" style="width: 45px;">
 
             <div class="media-body">
@@ -170,11 +171,11 @@
                     <div class="row">
                         <div class="col-2">
                             <button class="btn btn-dark font-weight-bold btn-block" data-toggle="modal" data-target="#moderate">Moderate</button>
-                </div>
-                <div class="col-2">
+                        </div>
+                        <div class="col-2">
                             <form asp-action="Delete" asp-controller="Comments">
-                                    @Html.Hidden("CommentId", comment.Id)
-                                    @Html.Hidden("Slug", comment.Post.Slug)
+                                @Html.Hidden("CommentId", comment.Id)
+                                @Html.Hidden("Slug", comment.Post.Slug)
                                 <button class="btn-sm btn-dark font-weight-bold btn-block">Delete</button>
                             </form>
                         </div>

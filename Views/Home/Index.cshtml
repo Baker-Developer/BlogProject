@@ -13,55 +13,6 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<div class="container-fluid pt-3">
-    <div class="container">
-        <div class="text-center pb-2">
-
-@*            <h6 class="text-primary text-uppercase font-weight-bold">Our Blog</h6>*@
-            <h1 class="mb-4">Latest From Blog</h1>
-        </div>
-        <div class="row">
-          
-          
-            @foreach (var blog in Model)
-            {
-                <a asp-controller="Posts" asp-action="BlogPostIndex" asp-route-id="@blog.Id" />
-                 <div class="col-sm-12 col-md-6 col-lg-6 mt-4">
-                <div class="position-relative">
-                  
-                        <img class="img-fluid w-100" src="@_imageService.DecodeImage(blog.ImageData, blog.ContentType)" alt="">
-                @*    <div class="position-absolute bg-primary d-flex flex-column align-items-center">
-                    </div>*@
-                </div>
-                <div class="" style="padding: 30px;">
-                    <div class="d-flex mb-3">
-                        <div class="d-flex align-items-center">
-                                <img class="rounded-circle" style="width: 40px; height: 40px;" src="~/images/defaultUserImage.png" alt="">
-                                <a class="text-muted ml-2" href="">Authored By @blog.BlogUser.FullName </a>
-                                <a class="text-muted ml-2" href="">On @blog.Created.ToString("MMM dd, yyyy")</a>
-                        </div>
-                        <div class="d-flex align-items-center ml-4">
-                          @*  <i class="far fa-bookmark text-primary"></i>
-                            <a class="text-muted ml-2" href="">Web Design</a>*@
-                        </div>
-                    </div>
-                    <h4 class="font-weight-bold mb-3">@blog.Name</h4>
-                        <p>@blog.Description</p>
-                    <a class="border-bottom border-primary text-uppercase text-decoration-none" asp-action="BlogPostIndex" asp-controller="Posts" asp-route-id="@blog.Id">Read More <i class="fa fa-angle-right"></i></a>
-                </div>
-                </div>
-
-
-            }
-          
-        </div>
-    </div>
-</div>
-
-
-
-
-
 
 <section id="blog" class="blog">
 
@@ -74,63 +25,46 @@
                 <article class="entry">
 
 
-                    @foreach (var blog in Model) {
+                    @foreach (var blog in Model)
+                    {
                         <div class="entry-img">
                             <img src="@_imageService.DecodeImage(blog.ImageData, blog.ContentType)" alt="" class="img-fluid">
                         </div>
 
                         <h2 class="entry-title">
-                            <a href="blog-single.html">##</a>
+                            <p href="blog-single.html">@blog.Name</p>
                         </h2>
 
                         <div class="entry-meta">
                             <ul>
                                 <li class="d-flex align-items-center">
-                                     <a href="blog-single.html">
+                                    <a href="blog-single.html">
                                         <img class="rounded-circle" style="width: 25px; height: 25px;" src="~/images/defaultUserImage.png" alt="">
                                         Authored By @blog.BlogUser.FullName
                                     </a>
                                 </li>
+                               
                                 <li class="d-flex align-items-center">
-                                    <i class="bi bi-clock"></i> <a href="blog-single.html">
-                                        <time datetime="2020-01-01">Jan 1, 2020</time>
-                                    </a>
+                                    <hr>
+                                    <p class="text-muted ml-2" href="">On @blog.Created.ToString("MMM dd, yyyy")</p>
                                 </li>
-                                <hr>
-                            @*    <li class="d-flex align-items-center">
-                                    <i class="bi bi-chat-dots"></i> <a href="blog-single.html">
-                                        12
-                                        Comments
-                                    </a>
-                                </li>*@
                             </ul>
                         </div>
 
                         <div class="entry-content">
-                            <p>
-                                ###
-                            </p>
+                            <p>@blog.Description</p>
                             <div class="read-more">
-                                <a href="blog-single.html">Read More</a>
+                                <a class="" asp-action="BlogPostIndex" asp-controller="Posts" asp-route-id="@blog.Id">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     }
 
-                 
-
                 </article>
                 <!-- End blog entry -->
             </div>
-
-
         </div>
     </div>
 </section><!-- End Blog Section -->
-
-
-
-
-
 <!--Add Paging Controls Here-->
 <div class="row">
     <div class="col h3">
@@ -140,10 +74,10 @@
 
 <div class="row">
     <div class="col">
-       @Html.PagedListPager(Model, page => Url.Action("Index", new {page = page}),
-       new PagedListRenderOptionsBase {
-          LiElementClasses = new string[] {"page-item"},
-          PageClasses = new string[] {"page-link"}
-       })
+        @Html.PagedListPager(Model, page => Url.Action("Index", new {page = page}),
+        new PagedListRenderOptionsBase {
+        LiElementClasses = new string[] {"page-item"},
+        PageClasses = new string[] {"page-link"}
+        })
     </div>
 </div>
