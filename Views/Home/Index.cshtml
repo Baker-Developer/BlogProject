@@ -38,7 +38,7 @@
                         <div class="entry-meta">
                             <ul>
                                 <li class="d-flex align-items-center">
-                                    <a href="blog-single.html">
+                                    <a >
                                         <img class="rounded-circle" style="width: 25px; height: 25px;" src="~/images/defaultUserImage.png" alt="">
                                         Authored By @blog.BlogUser.FullName
                                     </a>
@@ -53,8 +53,8 @@
 
                         <div class="entry-content">
                             <p>@blog.Description</p>
-                            <div class="read-more">
-                                <a class="" asp-action="BlogPostIndex" asp-controller="Posts" asp-route-id="@blog.Id">Read More <i class="fa fa-angle-right"></i></a>
+                            <div class="">
+                                <a asp-action="BlogPostIndex" asp-controller="Posts" asp-route-id="@blog.Id">Read More <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     }
