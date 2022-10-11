@@ -51,6 +51,30 @@ namespace BlogProject.Controllers
             return View();
         }
 
+        [Route("/Home/HandleError/{code:int}")]
+        public IActionResult HandleError(int code)
+        {
+            var customError = new CustomError();
+
+            customError.code = code;
+
+            if (code == 404)
+            {
+                customError.message = "The page you are looking for might have been removed had its name changed or is temporarily unavailable. If the issue persists please contact the developer.";
+            }
+            else if (code == 500)
+            {
+                customError.message = "Internal Service Error";
+            }
+            else
+            {
+                customError.message = "Something Went Wrong";
+            }
+
+            return View("~/Views/Shared/CustomError.cshtml", customError);
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Contact(ContactMe model)
