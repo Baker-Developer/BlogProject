@@ -24,7 +24,7 @@ namespace BlogProject.Services
         public async Task ManageDataAsync()
         {
             // Task: Create The DataBase From The Migrations
-            await _dbContext.Database.MigrateAsync(); 
+            await _dbContext.Database.MigrateAsync();
 
             // Task 1: Seeding A Few ROLES Into The System
             await SeedRolesAsync();
@@ -90,6 +90,8 @@ namespace BlogProject.Services
                 PhoneNumber = "5013393105",
                 EmailConfirmed = true
             };
+
+
 
             // Step 2: Use The UserManager To Create A New User That Is Defined By moderatorUser
             await _userManager.CreateAsync(moderatorUser, "Abc&123!");

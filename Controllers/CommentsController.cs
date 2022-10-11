@@ -211,10 +211,20 @@ namespace BlogProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id, string slug)
         {
-            var comment = await _context.Comments.FindAsync(id);
-            // TODO: Fix Comments Delete
-            _context.Comments.Remove(comment);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var comment = await _context.Comments.FindAsync(id);
+                // TODO: Fix Comments Delete
+                _context.Comments.Remove(comment);
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+       
 
             return RedirectToAction("Details", "Posts", new { slug }, "commentSection");
         }
