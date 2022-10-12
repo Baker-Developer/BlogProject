@@ -24,13 +24,13 @@
 
     <!-- Template Main CSS File -->
     <link href="~/css/main.css" rel="stylesheet" />
-
+    <link href="~/css/custom.css" rel="stylesheet" />
 </head>
 
 <body>
 
     <!-- ======= Header ======= -->
-    <section id="topbar" class="topbar d-flex align-items-center">
+@*    <section id="topbar" class="topbar d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
                 <i class="bi bi-envelope d-flex align-items-center">
@@ -45,18 +45,20 @@
                 <a href="#" class="instagram"><i class="bi bi-linkedin"></i></a>
             </div>
         </div>
-    </section>
+    </section>*@
     <!-- End Top Bar -->
 
     <header id="header" class="header d-flex align-items-center">
 
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
+            <a asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 @*  <img src="assets/img/logo.png" alt="">*@
-                <h1>Impact<span>.</span></h1>
+                <h1>Baker Blog</h1>
             </a>
+        
             <nav id="navbar" class="navbar">
+               
                 <ul>
 
                     <li> <a asp-controller="Home" asp-action="Index" class="nav-link btn btn-link ">Home</a></li>
@@ -92,6 +94,22 @@
     <!-- End Header -->
 
     <main id="main">
+   
+        <section id="breadcrumbs" class="breadcrumbs">
+            <div class="">
+                <div class="container text-center py-5">
+                    <h1 class="text-primary mb-4">Benjamin Baker</h1>
+                    <h1 class="text-white  mb-5">A Custom Web Applicaiton Using .Net MVC & Bootstrap</h1>
+                    <div class="mx-auto" style="width: 100%; max-width: 600px;">
+                        <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
+                            <input class="form-control border-light" type="search" style="padding: 30px;" placeholder="Search Blogs"
+                                   aria-label="Search" name="SearchTerm">
+                            <button class="btn btn-primary px-3" type="submit">Search</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- ======= Blog Section ======= -->
         <section id="blog" class="blog">

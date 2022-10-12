@@ -158,8 +158,8 @@
             *****************************************************************@
                 @if (comment.Moderated is null && comment.Deleted is null && comment.BlogUserId == userManager.GetUserId(User))
                 {
-                    <hr>
-                    <button data-toggle="modal" data-target="#editModal" class="btn btn-primary font-weight-bold btn-block">Edit</button>
+                    <hr class="border-4">
+                    <button data-toggle="modal" data-target="#editModal" class="btn btn-primary font-weight-bold">Edit</button>
                 }
 
                 @****************************************************************
