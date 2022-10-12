@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BlogProject.Data;
 using BlogProject.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BlogProject.Controllers
 {
@@ -22,12 +23,15 @@ namespace BlogProject.Controllers
         }
 
 
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> OriginalIndex()
         {
             var originalComments = await _context.Comments.ToListAsync();
             return View("Index", originalComments);
         }
 
+
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> ModeratedIndex()
         {
             var moderatedComments = await _context.Comments.Where(c => c.Moderated != null).ToListAsync();
@@ -45,6 +49,7 @@ namespace BlogProject.Controllers
         //    return View("Index");
         //}
 
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Index()
         {
             var allComments = await _context.Comments.ToListAsync();
@@ -186,6 +191,7 @@ namespace BlogProject.Controllers
         }
 
         // GET: Comments/Delete/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -218,6 +224,8 @@ namespace BlogProject.Controllers
                 _context.Comments.Remove(comment);
 
                 await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception)
             {
@@ -226,7 +234,7 @@ namespace BlogProject.Controllers
             }
        
 
-            return RedirectToAction("Details", "Posts", new { slug }, "commentSection");
+            /*return RedirectToAction("Details", "Posts", new { slug }, "commentSection")*/;
         }
 
         private bool CommentExists(int id)
