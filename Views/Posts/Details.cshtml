@@ -167,7 +167,7 @@
             *****************************************************************@
                 @if (User.IsInRole(BlogRole.Moderator.ToString()) || User.IsInRole(nameof(BlogRole.Administrator))  && comment.Deleted is null)
                 {
-                    <hr>
+                    @*<hr>
                     <div class="row">
                         <div class="col-2">
                             <button class="btn btn-primary font-weight-bold btn-block" data-toggle="modal" data-target="#moderate">Moderate</button>
@@ -179,7 +179,7 @@
                                 <button class="btn btn-danger ">Delete</button>
                             </form>
                         </div>
-                    </div>
+                    </div>*@
                 }
 
             </div>
