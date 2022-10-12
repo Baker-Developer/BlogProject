@@ -1,3 +1,21 @@
 ﻿.breadcrumbs {
     background-image: url("/images/code.jpg");
 }
+
+
+.header {
+    background-color: #1d1d1f !important;
+}
+
+.footer {
+    background-color: #1d1d1f !important;
+}
+
+.navbar ul {
+    background: #1d1d1f !important;
+}
+
+.mobile-nav-active .navbar:before {
+    background: #1d1d1f !important;
+    opacity: 80%;
+}
