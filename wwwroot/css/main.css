@@ -565,8 +565,8 @@ section {
     padding: 10px 0;
     margin: 10px 20px;
     transition: all 0.5s ease-in-out;
-    background-color: #007466;
-    border: 1px solid #006459;
+   /* background-color: #007466;
+    border: 1px solid #006459;*/
   }
 
   .navbar .dropdown>.dropdown-active,
