@@ -80,6 +80,10 @@
                     {
                         <li><a asp-controller="Posts" asp-action="Create" class="nav-link btn btn-link ">Create Post</a></li>
                     }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li><a asp-controller="Comments" asp-action="Index" class="nav-link btn btn-link ">Delete Comments</a></li>
+                    }
 
                     <li class="dropdown">
                         <a class="nav-link btn btn-link">
@@ -103,18 +107,21 @@
     <main id="main">
    
         <section id="breadcrumbs" class="breadcrumbs">
-            <div class="">
+            <div class="row d-flex">
                 <div class="container text-center py-5 ">
                     <h1 class="mb-4 text-white">Benjamin Baker's Blog</h1>  
                     <p class="text-white"> Built Using</p>
-                    <h1>
-                        <i class="devicon-dot-net-plain-wordmark colored icon"></i>
-                        <i class="devicon-csharp-plain-wordmark colored icon"></i>
-                        <i class="devicon-postgresql-plain-wordmark colored icon"></i>
-                        <i class="devicon-bootstrap-plain-wordmark colored icon"></i>
-                        <i class="devicon-heroku-plain-wordmark colored icon"></i>
-                    </h1>
-                    <div class="mx-auto" style="width: 100%; max-width: 600px;">
+                     <div class="col-12">
+                         <div class="row d-flex justify-content-center">
+                            <img src="/images/csharp.png" class="img-fluid" style="height:90px;" />
+                            <img src="/images/dotnetmvc.png" class="img-fluid" style="height:90px;" />
+                            <img src="/images/pgadminlogo.png" class="img-fluid" style="height:90px;" />
+                            <img src="/images/html-css-js-logo.png" class="img-fluid" style="height:90px;" />
+                            <img src="/images/bootstraplogo.png" class="img-fluid" style="height:90px;" />
+                            <img src="/images/herokulogo.png" class="img-fluid" style="height:90px;" />
+                         </div>
+                     </div>
+                    <div class="mx-auto mt-3" style="width: 100%; max-width: 600px;">
                         <form class="d-flex" asp-action="SearchIndex" asp-controller="Posts">
                             <input class="form-control border-light" type="search" style="padding: 30px;" placeholder="Search Blogs"
                                    aria-label="Search" name="SearchTerm">
