@@ -149,7 +149,7 @@ namespace BlogProject.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("Blog Project"),
+                _urlEncoder.Encode("Baker Blog Project"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }

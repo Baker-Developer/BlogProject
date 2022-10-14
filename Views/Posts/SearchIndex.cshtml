@@ -13,7 +13,7 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="row">
+@*<div class="row">
     @foreach (var post in Model)
     {
         <div class="col-sm-12 col-md-6 col-lg-4 mt-4">
@@ -33,12 +33,79 @@
                     </div>
 
                 </div>
-                <img class="card-img-bottom img-fliud"   src="@imageService.DecodeImage(post.ImageData,  post.ContentType)" />
+                <img class="card-img-bottom img-fliud" src="@imageService.DecodeImage(post.ImageData,  post.ContentType)" />
             </div>
 
         </div>
     }
+</div>*@
+
+
+<div class="container">
+    <div class="row gy-4 posts-list">
+        @foreach (var post in Model)
+        {
+            <div class="col-xl-4 col-md-6">
+                <article>
+                    <div class="post-img">
+                        <img src="@imageService.DecodeImage(post.ImageData, post.ContentType)" alt="" class="img-fluid">
+                       
+                      @*  <h2 class="title">
+                            <a asp-action="Details" asp-controller="Posts" asp-route-slug="@post.Slug">Read More</a>
+                        </h2>*@
+                    
+                    </div>
+                    <p class="card-text text-center">@post.Abstract</p>
+                    <h2 class="title">
+                        <a class="" asp-action="Details" asp-controller="Posts" asp-route-slug="@post.Slug">Read More</a>
+                    </h2>
+                </article>
+            </div>
+        }
+    </div>
 </div>
+
+@*
+<div class="container">
+    <div class="row gy-4 posts-list">
+        @foreach (var blog in Model)
+        {
+            <div class="col-xl-4 col-md-6">
+                <article>
+
+                    <div class="post-img">
+                        <img src="@_imageService.DecodeImage(blog.ImageData, blog.ContentType)" alt="" class="img-fluid">
+                    </div>
+
+                    <p class="post-category">@blog.Name</p>
+
+                    <h2 class="title">
+                        <a asp-action="BlogPostIndex" asp-controller="Posts" asp-route-id="@blog.Id">@blog.Description</a>
+                    </h2>
+
+                    <div class="d-flex align-items-center">
+                        <img src="@_imageService.DecodeImage(blog.BlogUser.ImageData, blog.BlogUser.ContentType)" alt="" class="img-fluid post-author-img flex-shrink-0">
+                        <div class="post-meta">
+                            <p class="post-author-list">@blog.BlogUser.FullName</p>
+                            <p class="post-date">
+                                <time>On @blog.Created.ToString("MMM dd, yyyy")</time>
+                            </p>
+                        </div>
+                    </div>
+
+
+                </article>
+            </div>
+
+
+        }
+    </div
+
+</div>*@
+
+
+
+
 
 <hr />
 
