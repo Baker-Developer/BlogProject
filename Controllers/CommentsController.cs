@@ -129,6 +129,7 @@ namespace BlogProject.Controllers
 
 
         // GET: Comments/Edit/5
+        [Authorize(Roles = "Administrator,Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
