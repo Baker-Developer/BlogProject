@@ -60,8 +60,8 @@
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
             <a asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                @*  <img src="assets/img/logo.png" alt="">*@
-                <h1>Baker Blog</h1>
+                  <img src="/images/bakerblogpencil.png"  alt="">
+              @*  <h1>Baker Blog</h1>*@
             </a>
         
             <nav id="navbar" class="navbar">
@@ -80,9 +80,17 @@
                     {
                         <li><a asp-controller="Posts" asp-action="Create" class="nav-link btn btn-link ">Create Post</a></li>
                     }
-                    @if (User.IsInRole("Administrator"))
+                    @if (User.IsInRole("Administrator") || (User.IsInRole("Moderator")))
                     {
                         <li><a asp-controller="Comments" asp-action="Index" class="nav-link btn btn-link ">Delete Comments</a></li>
+                    }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li><a asp-controller="Posts" asp-action="Index" class="nav-link btn btn-link ">Delete Post</a></li>
+                    }
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <li><a asp-controller="Blogs" asp-action="Index" class="nav-link btn btn-link ">Delete Blog</a></li>
                     }
 
                     <li class="dropdown">
@@ -152,7 +160,7 @@
             <div class="row gy-4">
                 <div class="col-lg-5 col-md-12 footer-info">
                     <a href="index.html" class="logo d-flex align-items-center">
-                        <span>Baker Blog</span>
+                        <img src="/images/bakerblogpencil.png" alt="">
                     </a>
                     <p>
                         My personal blog. Feel free to look around and leave a comment if you enjoy what you see!
@@ -189,7 +197,7 @@
                          
                         Conway, AR 72034<br>
                         United States <br><br>
-                        <strong>Phone:</strong> 501-339-105<br>
+                        <strong>Phone:</strong> 501-339-3105<br>
                         <strong>Email:</strong> benjamin@bakermedical.net<br>
                     </p>
 
