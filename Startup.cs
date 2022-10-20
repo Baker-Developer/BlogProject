@@ -96,7 +96,7 @@ namespace BlogProject
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                  name: "SlugRoute",
+                  name: "slugRoute",
                   pattern: "BlogPosts/UrlFriendly/{slug}",
                   defaults: new { controller = "Posts", action = "Deatils" });
 
