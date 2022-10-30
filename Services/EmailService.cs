@@ -3,6 +3,7 @@ using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using System;
 using System.Threading.Tasks;
 
 namespace BlogProject.Services
@@ -41,30 +42,71 @@ namespace BlogProject.Services
             smtp.Disconnect(true);
         }
 
-        public async Task SendEmailAsync(string emailTo, string subject, string htmlMessage)
+        //public async Task SendEmailAsync(string emailTo, string subject, string htmlMessage)
+        //{
+        //    var email = new MimeMessage();
+
+        //    email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
+        //    email.To.Add(MailboxAddress.Parse(emailTo));
+        //    email.Subject = subject;
+
+        //    var builder = new BodyBuilder()
+        //    {
+        //        HtmlBody = htmlMessage
+        //    };
+
+        //    email.Body = builder.ToMessageBody();
+
+        //    using var smtp = new SmtpClient();
+
+        //    smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
+
+        //    smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+
+        //    await smtp.SendAsync(email);
+
+        //    smtp.Disconnect(true);
+        //}
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var email = new MimeMessage();
+            var emailSender = _mailSettings.Mail ?? Environment.GetEnvironmentVariable("Email");
 
-            email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
-            email.To.Add(MailboxAddress.Parse(emailTo));
-            email.Subject = subject;
+            MimeMessage newEmail = new();
 
-            var builder = new BodyBuilder()
+            newEmail.Sender = MailboxAddress.Parse(emailSender);
+
+            foreach (var emailAddress in email.Split(";"))
             {
-                HtmlBody = htmlMessage
-            };
+                newEmail.To.Add(MailboxAddress.Parse(emailAddress));
+            }
 
-            email.Body = builder.ToMessageBody();
+            newEmail.Subject = subject;
 
-            using var smtp = new SmtpClient();
+            BodyBuilder emailBody = new();
+            emailBody.HtmlBody = htmlMessage;
 
-            smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
+            newEmail.Body = emailBody.ToMessageBody();
 
-            smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+            // At This Point Log Into SMTP Client
+            using SmtpClient smtpClient = new();
 
-            await smtp.SendAsync(email);
+            try
+            {
+                var host = _mailSettings.Host ?? Environment.GetEnvironmentVariable("Host");
+                var port = _mailSettings.Port != 0 ? _mailSettings.Port : int.Parse(Environment.GetEnvironmentVariable("Port")!);
+                var password = _mailSettings.Password ?? Environment.GetEnvironmentVariable("Password");
 
-            smtp.Disconnect(true);
+                await smtpClient.ConnectAsync(host, port, SecureSocketOptions.StartTls);
+                await smtpClient.AuthenticateAsync(emailSender, password);
+                await smtpClient.SendAsync(newEmail);
+                await smtpClient.DisconnectAsync(true);
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                throw;
+            }
+
         }
     }
 }
