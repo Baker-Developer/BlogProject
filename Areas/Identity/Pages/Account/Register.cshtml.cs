@@ -27,7 +27,7 @@ namespace BlogProject.Areas.Identity.Pages.Account
         private readonly SignInManager<BlogUser> _signInManager;
         private readonly UserManager<BlogUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IBlogEmailSender _emailSender;
+        private readonly IEmailSender _emailSender;
         private readonly IImageService _imageService;
         private readonly IConfiguration _configuration;
 
@@ -35,7 +35,7 @@ namespace BlogProject.Areas.Identity.Pages.Account
             UserManager<BlogUser> userManager,
             SignInManager<BlogUser> signInManager,
             ILogger<RegisterModel> logger,
-            IBlogEmailSender emailSender,
+            IEmailSender emailSender,
             IImageService imageService,
             IConfiguration configuration)
         {

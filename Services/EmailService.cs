@@ -1,6 +1,7 @@
 ﻿using BlogProject.ViewModels;
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BlogProject.Services
 {
-    public class EmailService : IBlogEmailSender
+    public class EmailService : IEmailSender
     {
 
         private readonly MailSettings _mailSettings;
@@ -24,8 +25,8 @@ namespace BlogProject.Services
         public async Task SendContactEmailAsync(string emailFrom, string name, string subject, string htmlMessage)
         {
             var email = new MimeMessage();
-            email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
-            email.To.Add(MailboxAddress.Parse(_mailSettings.Mail));
+            email.Sender = MailboxAddress.Parse(_mailSettings.Email);
+            email.To.Add(MailboxAddress.Parse(_mailSettings.Email));
             email.Subject = subject;
 
             var builder = new BodyBuilder();
@@ -35,7 +36,7 @@ namespace BlogProject.Services
 
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
-            smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+            smtp.Authenticate(_mailSettings.Email, _mailSettings.Password);
 
             await smtp.SendAsync(email);
 
@@ -69,7 +70,7 @@ namespace BlogProject.Services
         //}
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            var emailSender = _mailSettings.Mail ?? Environment.GetEnvironmentVariable("Email");
+            var emailSender = _mailSettings.Email ?? Environment.GetEnvironmentVariable("Email");
 
             MimeMessage newEmail = new();
 

@@ -19,9 +19,9 @@ namespace BlogProject.Areas.Identity.Pages.Account
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<BlogUser> _userManager;
-        private readonly IBlogEmailSender _emailSender;
+        private readonly IEmailSender _emailSender;
 
-        public ForgotPasswordModel(UserManager<BlogUser> userManager, IBlogEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<BlogUser> userManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _emailSender = emailSender;

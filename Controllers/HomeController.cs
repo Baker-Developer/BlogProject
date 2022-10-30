@@ -2,6 +2,7 @@
 using BlogProject.Models;
 using BlogProject.Services;
 using BlogProject.ViewModels;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
@@ -18,10 +19,10 @@ namespace BlogProject.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IBlogEmailSender _emailSender;
+        private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, IBlogEmailSender emailSender, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, IEmailSender emailSender, ApplicationDbContext context)
         {
             _logger = logger;
             _emailSender = emailSender;
@@ -84,8 +85,8 @@ namespace BlogProject.Controllers
             //await _emailSender.SendContactEmailAsync(model.Email, model.Name, model.Subject, model.Message);
             try
             {
-                model.Message = $"{model.Message} <hr/> Phone: {model.PhoneNumber}";
-                await _emailSender.SendContactEmailAsync(model.Email, model.Name, model.Subject, model.Message);
+                //model.Message = $"{model.Message} <hr/> Phone: {model.PhoneNumber}";
+                //await _emailSender.SendContactEmailAsync(model.Email, model.Name, model.Subject, model.Message);
             }
             catch (Exception)
             {
