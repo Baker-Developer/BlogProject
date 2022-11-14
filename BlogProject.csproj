@@ -1,9 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <UserSecretsId>aspnet-BlogProject-F47501A7-85B9-4D01-B4C7-C003944383DE</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+	  
+	  <InvariantGlobalization>true</InvariantGlobalization>
+	  
   </PropertyGroup>
 
   <ItemGroup>
