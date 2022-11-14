@@ -370,7 +370,7 @@ section {
     align-items: center;
     justify-content: space-between;
     padding: 0 3px;
-    font-family: var(--font-secondary);
+   /* font-family: var(--font-secondary);*/
     font-size: 16px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.6);
