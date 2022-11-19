@@ -18,7 +18,7 @@ namespace BlogProject
         {
             //CreateHostBuilder(args).Build().Run();
             var host = CreateHostBuilder(args).Build();
-
+            
             // Pull Out Registered DataService
             var dataService = host.Services.
                 CreateScope().
