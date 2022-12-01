@@ -75,7 +75,6 @@
                     <li> <a asp-controller="Home" asp-action="Index" class="nav-link btn btn-link ">Home</a></li>
                     <li>    <a asp-controller="Home" asp-action="Contact" class="nav-link btn btn-link ">Contact</a></li>
                     <li>    <a asp-controller="Home" asp-action="About" class="nav-link btn btn-link ">About</a></li>
-
                     @if (User.IsInRole("Administrator"))
                     {
                         <li><a asp-controller="Blogs" asp-action="Create" class="nav-link btn btn-link ">Create Blog</a></li>
